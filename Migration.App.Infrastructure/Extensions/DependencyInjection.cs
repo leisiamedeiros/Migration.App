@@ -15,7 +15,7 @@ namespace Migration.App.Infrastructure.Extensions
             return services;
         }
 
-        public static IServiceCollection AddFluentMigration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddFluentMigrationToApp(this IServiceCollection services, IConfiguration configuration)
         {
             services
                 .AddFluentMigratorCore()

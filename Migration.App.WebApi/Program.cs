@@ -17,7 +17,8 @@ builder.Services.AddRouting(opt =>
 })
 .AddRepositories()
 .AddSwaggerServiceConfig()
-.AddConfigurationOptions(builder.Configuration);
+.AddConfigurationOptions(builder.Configuration)
+.AddFluentMigrationToApp(builder.Configuration);
 
 
 // configure app
