@@ -3,5 +3,6 @@
     public interface IMigrationRepository
     {
         Task<string> GetMigrationsAsync();
+        Task Migrate();
     }
 }

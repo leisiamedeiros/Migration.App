@@ -17,5 +17,10 @@ namespace Migration.App.Infrastructure.Repository
         {
             return await Task.FromResult(_options.SqlServer);
         }
+
+        public Task Migrate()
+        {
+            return Task.CompletedTask;
+        }
     }
 }
