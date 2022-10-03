@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  mssql2019:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    volumes:
+      - mssqldbdata:/var/opt/mssql
+      - ./Migration.App.Infrastructure/Migrations/Scripts/ensure_database.sql:/scripts/ensure_database.sql
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /opt/mssql/bin/sqlservr &
+        sleep 30
+        /opt/mssql-tools/bin/sqlcmd -U sa -P "yourStrong(!)Password" -l 30 -e -i /scripts/ensure_database.sql
+        sleep infinity
+    restart: always
+    container_name: mssqlserver2019
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "yourStrong(!)Password"
+      MSSQL_PID: "Express"
+
+volumes:
+  mssqldbdata:
