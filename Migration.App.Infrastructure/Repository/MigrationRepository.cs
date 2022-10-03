@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
+using Migration.App.Creator.Models;
 using Migration.App.Infrastructure.Extensions;
 using Migration.App.Infrastructure.Interfaces;
 
@@ -13,9 +16,13 @@ namespace Migration.App.Infrastructure.Repository
             _options = options.Value;
         }
 
-        public async Task<string> GetMigrationsAsync()
+        public async Task<IEnumerable<VersionInfo>> GetMigrationsAppliedAsync()
         {
-            return await Task.FromResult(_options.SqlServer);
+            using var conn = new SqlConnection(_options.SqlServer);
+
+            return await conn.QueryAsync<VersionInfo>(
+                "SELECT [Version], [AppliedOn], [Description] FROM [dbo].[VersionInfo]"
+            );
         }
 
         public Task Migrate()

@@ -1,8 +1,10 @@
-﻿namespace Migration.App.Infrastructure.Interfaces
+﻿using Migration.App.Creator.Models;
+
+namespace Migration.App.Infrastructure.Interfaces
 {
     public interface IMigrationRepository
     {
-        Task<string> GetMigrationsAsync();
+        Task<IEnumerable<VersionInfo>> GetMigrationsAppliedAsync();
         Task Migrate();
     }
 }

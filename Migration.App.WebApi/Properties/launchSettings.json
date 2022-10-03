@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Migration.App.Creator": {
+    "Migration.App.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
