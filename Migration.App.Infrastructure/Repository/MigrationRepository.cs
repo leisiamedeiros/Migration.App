@@ -25,9 +25,5 @@ namespace Migration.App.Infrastructure.Repository
             );
         }
 
-        public Task Migrate()
-        {
-            return Task.CompletedTask;
-        }
     }
 }

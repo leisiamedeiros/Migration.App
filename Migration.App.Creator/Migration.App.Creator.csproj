@@ -5,5 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Templates\MigrationClass.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Templates\MigrationClass.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

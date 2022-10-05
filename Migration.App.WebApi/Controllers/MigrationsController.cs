@@ -1,24 +1,23 @@
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Mvc;
+using Migration.App.Creator.Extensions;
 using Migration.App.Creator.Models;
 using Migration.App.Infrastructure.Interfaces;
+using Migration.App.WebApi.Filters;
 
 namespace Migration.App.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MigrationsController : ControllerBase
     {
-        private readonly ILogger<MigrationsController> _logger;
         private readonly IMigrationRepository _migrationRepository;
         private readonly IServiceProvider _serviceProvider;
 
         public MigrationsController(
-            ILogger<MigrationsController> logger,
             IMigrationRepository migrationRepository,
             IServiceProvider serviceProvider)
         {
-            _logger = logger;
             _migrationRepository = migrationRepository;
             _serviceProvider = serviceProvider;
         }
@@ -33,6 +32,21 @@ namespace Migration.App.WebApi.Controllers
         {
             var result = await _migrationRepository.GetMigrationsAppliedAsync();
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Create a migration class inside our infrastructure project
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        [LocalOnly]
+        [HttpPost("file/local")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult CreateMigration(string fileName)
+        {
+            FileHandler.CreateMigrationClassFile(fileName);
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using Microsoft.OpenApi.Models;
+using Migration.App.WebApi.Filters;
+using System.Reflection;
 
 namespace Migration.App.WebApi.Extensions
 {
@@ -9,6 +11,10 @@ namespace Migration.App.WebApi.Extensions
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(opt =>
             {
+                opt.DocumentFilter<SwaggerDocsFilter>();
+
+                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Migration.App API", Version = "v1" });
+
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
@@ -22,9 +28,10 @@ namespace Migration.App.WebApi.Extensions
             {
                 opt.RouteTemplate = "api-docs/{documentName}/swagger.json";
             });
+
             applicationBuilder.UseSwaggerUI(opt =>
             {
-                opt.SwaggerEndpoint("/api-docs/v1/swagger.json", "v1");
+                opt.SwaggerEndpoint("/api-docs/v1/swagger.json", "Migration.App API V1");
             });
 
             return applicationBuilder;
