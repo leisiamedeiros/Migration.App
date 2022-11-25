@@ -12,7 +12,7 @@ Navigate with the command line to the folder where you want the file to be creat
 ## Installing Locally
 Clone this project and do the following;
 
-Install
+Install  
 `dotnet tool install --global --add-source ./nupkg Migration.App.Creator`
 
 Uninstall  
