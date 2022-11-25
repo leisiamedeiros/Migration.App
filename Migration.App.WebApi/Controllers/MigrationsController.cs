@@ -1,9 +1,7 @@
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Mvc;
-using Migration.App.Creator.Extensions;
 using Migration.App.Creator.Models;
 using Migration.App.Infrastructure.Interfaces;
-using Migration.App.WebApi.Filters;
 
 namespace Migration.App.WebApi.Controllers
 {
@@ -32,21 +30,6 @@ namespace Migration.App.WebApi.Controllers
         {
             var result = await _migrationRepository.GetMigrationsAppliedAsync();
             return Ok(result);
-        }
-
-        /// <summary>
-        /// Create a migration class inside our infrastructure project
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        [LocalOnly]
-        [HttpPost("file/local")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateMigration(string fileName)
-        {
-            FileHandler.CreateMigrationClassFile(fileName);
-            return StatusCode(StatusCodes.Status201Created);
         }
 
         /// <summary>
