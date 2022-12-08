@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
-using Migration.App.Creator.Models;
+using Migration.App.Domain.Models;
 using Migration.App.Infrastructure.Extensions;
 using Migration.App.Infrastructure.Interfaces;
 

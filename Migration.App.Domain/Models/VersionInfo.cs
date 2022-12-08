@@ -1,4 +1,4 @@
-﻿namespace Migration.App.Creator.Models
+﻿namespace Migration.App.Domain.Models
 {
     public class VersionInfo
     {

@@ -1,4 +1,4 @@
-﻿using Migration.App.Creator.Models;
+﻿using Migration.App.Domain.Models;
 
 namespace Migration.App.Infrastructure.Interfaces
 {

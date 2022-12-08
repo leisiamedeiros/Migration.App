@@ -1,7 +1,8 @@
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Mvc;
-using Migration.App.Creator.Models;
+using Migration.App.Domain.Models;
 using Migration.App.Infrastructure.Interfaces;
+using Migration.App.WebApi.Transport;
 
 namespace Migration.App.WebApi.Controllers
 {
@@ -26,6 +27,7 @@ namespace Migration.App.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(VersionInfo))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
         public async Task<IActionResult> GetMigrations()
         {
             var result = await _migrationRepository.GetMigrationsAppliedAsync();
@@ -38,7 +40,7 @@ namespace Migration.App.WebApi.Controllers
         /// <returns></returns>
         [HttpPost("execute")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
         public IActionResult RunMigrations()
         {
             // Instantiate the runner

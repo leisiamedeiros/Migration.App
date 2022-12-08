@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Migration.App.Creator\Migration.App.Creator.csproj" />
+    <ProjectReference Include="..\Migration.App.Domain\Migration.App.Domain.csproj" />
   </ItemGroup>
 
 </Project>
