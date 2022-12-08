@@ -1,8 +1,8 @@
 # Migration.App
 
-The main objective of this application is for you to be able to run your migrations automatically using the endpoint `migrations\execute` and see wich migrations was applied using the `migrations` endpoint.
+The main objective of this application is for you to be able to run your database migrations automatically using the endpoint `migrations\execute` and see wich migrations was applied using the `migrations` endpoint.
 
-There's a endpoit that only appears in `Local` environment for you to create the deploy class file by only passing the name and it will be created in the migration folder with the version setted up automatticaly.
+The [FluentMigrator](https://fluentmigrator.github.io/articles/quickstart.html#creating-your-first-migration) classes needs to be inside `\Migration.App.Infrastructure\Migrations\Deploys` folder, we have an example in this folder that runs against a scritp that is inside `\Migration.App.Infrastructure\Migrations\Scripts\` folder.
 
 Bellow a preview of the main functionalities;
 
